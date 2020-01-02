@@ -1,0 +1,6 @@
+{
+  "domain": "mwhnrt.eu.auth0.com",
+  "clientId": "6SxUCiJU0X94Sdk43yV7K6BxARJ8VEa3",
+  "redirect_uri": "http://localhost:3000",
+  "audience": "ttps://movie-match-track.herokuapp.com/v1/graphql"
+}
