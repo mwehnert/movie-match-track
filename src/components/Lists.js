@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Grid from '@kiwicom/orbit-components/lib/utils/Grid';
 import Stack from '@kiwicom/orbit-components/lib/Stack';
 import Button from '@kiwicom/orbit-components/lib/Button';
+import Loading from '@kiwicom/orbit-components/lib/Loading';
 import styled from 'styled-components';
 import { List } from './List.js';
 import ListData from './ListData.js';
@@ -24,7 +25,7 @@ function Lists(props) {
     setAddListModalVisible(!addListModalVisible);
   };
 
-  if (loading) return 'Loading...';
+  if (loading) return <Loading />;
   if (error) return `Lists Error! ${error.message}`;
 
   return (

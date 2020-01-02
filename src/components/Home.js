@@ -4,8 +4,10 @@ import List, { ListItem } from '@kiwicom/orbit-components/lib/List';
 import Button from '@kiwicom/orbit-components/lib/Button';
 import Stack from '@kiwicom/orbit-components/lib/Stack';
 import Check from '@kiwicom/orbit-components/lib/icons/Check';
+import { useAuth0 } from '../auth/auth0-wrapper';
 
 function Home() {
+  const { loginWithRedirect } = useAuth0();
   return (
     <CallOutBanner
       title="Track your Movies you like with friends"
@@ -14,8 +16,13 @@ function Home() {
       illustration={<img src="/mmt.png" />}
       actions={
         <Stack inline>
-          <Button>Sign Up</Button>
-          <Button>Login</Button>
+          <Button
+            onClick={() => {
+              return loginWithRedirect({});
+            }}
+          >
+            Sign Up / Login
+          </Button>
         </Stack>
       }
     >

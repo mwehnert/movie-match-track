@@ -9,6 +9,7 @@ function SecuredRoute(props) {
   return (
     <Route
       path={path}
+      exact
       render={() => {
         if (!isAuthenticated) {
           return <Home />;

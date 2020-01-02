@@ -14,11 +14,12 @@ function AddList({ addHandler, onCloseHandler }) {
 
   const onClickHandler = e => {
     addHandler({ variables: { listName: listname } });
+    onCloseHandler(e);
   };
 
   return (
     <Modal onClose={onCloseHandler}>
-      <ModalHeader title="Add Member to List" description="Enter User-ID of the user you want to add." />
+      <ModalHeader title="Start a new List" description="Enter the name of your new list." />
       <ModalSection>
         <InputField label="Name" value={listname} placeholder="Name" onChange={changeHandler} />
       </ModalSection>
@@ -26,7 +27,7 @@ function AddList({ addHandler, onCloseHandler }) {
         <Button onClick={onCloseHandler} icon={<ChevronLeft />} type="secondary">
           Back
         </Button>
-        <Button fullWidth disabled={listname === ''} type="button" onClick={onClickHandler}>
+        <Button primary fullWidth disabled={listname === ''} type="button" onClick={onClickHandler}>
           Add
         </Button>
       </ModalFooter>

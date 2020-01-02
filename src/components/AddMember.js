@@ -37,7 +37,7 @@ function AddMember({ currentUser, addMember, onCloseHandler }) {
             e.preventDefault();
             if (memberId !== currentUser) {
               addMember({ variables: { userId: memberId } });
-              onCloseHandler();
+              onCloseHandler(e);
             }
           }}
         >

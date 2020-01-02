@@ -8,6 +8,7 @@ import { useAuth0 } from '../auth/auth0-wrapper';
 import Stack from '@kiwicom/orbit-components/lib/Stack';
 import Badge from '@kiwicom/orbit-components/lib/Badge';
 import Plus from "@kiwicom/orbit-components/lib/icons/Plus";
+import Tooltip from '@kiwicom/orbit-components/lib/Tooltip';
 
 import WatchSection from './WatchSection';
 import { Card } from './Card';
@@ -17,14 +18,15 @@ const MemberWrapper = styled.ul`
   list-style: none;
   padding-left: 0;
   margin: 0;
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const Member = styled.li`
   display: inline-block;
   width: 50px;
   height: 50px;
-  margin: 0 5px;
+  margin: 2px;
   border-radius: 100%;
   background-image: url("${props => {
     return props.user.avatar;
@@ -85,9 +87,19 @@ function List({ list, addMember, removeMember, userId }) {
           </Stack>
         </Link>
       </Card>
-      {addMemberVisible &&
-        <AddMember onCloseHandler={toggleAddMemberVisible} addMember={addMember} currentUser={user.sub} />
-      }
+      {addMemberVisible && (
+        // <Tooltip
+        //   preferredPosition="bottom"
+        //   size="small"
+        //   content="Write your text here."
+        //   dataTest="test"
+        //   tabIndex="0"
+        //   enabled
+        //   removeUnderlinedText={false}
+        // >
+          <AddMember onCloseHandler={toggleAddMemberVisible} addMember={addMember} currentUser={user.sub} />
+        // </Tooltip>
+      )}
     </>
   );
 }

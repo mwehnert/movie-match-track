@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Layout, { LayoutColumn } from '@kiwicom/orbit-components/lib/Layout';
+import Loading from '@kiwicom/orbit-components/lib/Loading';
 import styled from 'styled-components';
 
 // for authentication using auth0
@@ -31,7 +31,6 @@ function App() {
   const httpLink = new HttpLink({
     uri: 'https://movie-match-track.herokuapp.com/v1/graphql',
   });
-  const { isAuthenticated, user } = useAuth0();
 
   // used state to get accessToken through getTokenSilently(), the component re-renders when state changes, thus we have
   // our accessToken in apollo client instance.
@@ -39,7 +38,7 @@ function App() {
 
   const { getTokenSilently, loading } = useAuth0();
   if (loading) {
-    return 'Loading...';
+    return <Loading />;
   }
 
   // get access token

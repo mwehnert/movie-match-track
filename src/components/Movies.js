@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
 import ChevronLeft from '@kiwicom/orbit-components/lib/icons/ChevronLeft';
-import Stack from '@kiwicom/orbit-components/lib/Stack';
+import Loading from '@kiwicom/orbit-components/lib/Loading';
 
 import { useParams, Link } from 'react-router-dom';
 
@@ -21,16 +19,24 @@ const BackLink = styled(Link)`
   text-decoration: none;
   color: white;
   vertical-align: middle;
+  width: 100px;
+  text-align: center;
+  color: DarkSlateGray;
+  background-color: goldenrod;
+  margin-top: 5px;
+  transform: rotate(-3deg);
+  font-weight: bold;
+  line-height: 1.6;
   &:hover,
-}
   &:focus {
     text-decoration: none;
-    color: lightgrey;
+    color: DarkSlateGray;
+    transform: rotate(-2deg);
   }
   > * {
     display: inline-block;
     vertical-align: middle;
-    color: lightgrey;
+    color: DarkSlateGray;
   }
 `;
 
@@ -64,7 +70,7 @@ function Movies(props) {
     setMoviesToAdd(newMoviesToAdd);
   };
 
-  if (loading) return 'Loading...';
+  if (loading) return <Loading />;
   if (error) return `Movies Error! ${error.message}`;
 
   return (
