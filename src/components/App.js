@@ -12,9 +12,11 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import { setContext } from 'apollo-link-context';
 import { useAuth0 } from '../auth/auth0-wrapper';
-import Movies from './Movies.js';
-import Lists from './Lists.js';
-import Header from './Header.js';
+import SecuredRoute from './SecuredRoute';
+import Movies from './Movies';
+import Lists from './Lists';
+import Header from './Header';
+import Home from './Home';
 
 const LayoutWrapper = styled.main`
   margin-top: 100px;
@@ -80,13 +82,9 @@ function App() {
       <Header />
       <Switch>
         <LayoutWrapper>
-          <Route exact path="/" component={Lists} />
-          <Route exact path="/list/:id" component={Movies} />
+          <SecuredRoute exact path="/" component={Lists} />
+          <SecuredRoute exact path="/list/:id" component={Movies} />
         </LayoutWrapper>
-        {/* <Layout type="MMB"> */}
-        {/* <LayoutColumn> */}
-        {/* </LayoutColumn> */}
-        {/* </Layout> */}
       </Switch>
     </ApolloProvider>
   );
