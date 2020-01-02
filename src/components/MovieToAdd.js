@@ -1,13 +1,12 @@
-import React, {useRef} from "react";
-import {gql} from "apollo-boost";
-import {useQuery, useMutation} from "@apollo/react-hooks";
+import React, { useRef } from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 
-import {useAuth0} from "../auth/auth0-wrapper";
+import Button from '@kiwicom/orbit-components/lib/Button';
+import Stack from '@kiwicom/orbit-components/lib/Stack';
+import { useAuth0 } from '../auth/auth0-wrapper';
 
-import {Movie} from "./Movie";
-
-import Button from "@kiwicom/orbit-components/lib/Button";
-import Stack from "@kiwicom/orbit-components/lib/Stack";
+import { Movie } from './Movie';
 
 // export const ADD_MOVIE = gql`
 //   query($id: Int!) {
@@ -32,27 +31,29 @@ import Stack from "@kiwicom/orbit-components/lib/Stack";
 // `;
 
 function MovieToAdd(props) {
-
-  const {isAuthenticated, user} = useAuth0();
-  const {removeFromAdd, movie} = props;
+  const { isAuthenticated, user } = useAuth0();
+  const { removeFromAdd, movie, list } = props;
 
   const userId = useRef(null);
 
   if (isAuthenticated) {
     userId.current = user.sub;
   } else {
-    userId.current = "none";
+    userId.current = 'none';
   }
 
   // like post mutation
-  const addMovie = () => props.addMovieMutation({
-    variables: {
-      movieName: movie.name,
-      userId: userId.current,
-      year: movie.year,
-      imdbUrl: movie.imdb_url
-    }
-  });
+  const addMovie = () => {
+    props.addMovieMutation({
+      variables: {
+        movieName: movie.name,
+        userId: userId.current,
+        year: movie.year,
+        imdbUrl: movie.imdb_url,
+        listId: list[0].id,
+      },
+    });
+  };
 
   const onRemoveClick = e => {
     e.preventDefault();
@@ -63,7 +64,7 @@ function MovieToAdd(props) {
     e.preventDefault();
     addMovie();
     removeFromAdd(movie);
-  }
+  };
 
   return (
     <Stack flex align="center">

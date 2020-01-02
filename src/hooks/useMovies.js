@@ -17,8 +17,8 @@ export const MOVIE_LIST = gql`
 `;
 
 const ADD_MOVIE = gql`
-  mutation($movieName: String!, $userId: String!, $year: Int!, $imdbUrl: String!) {
-    insert_movie(objects: [{ name: $movieName, created_by: $userId, year: $year, imdb_url: $imdbUrl }]) {
+  mutation($movieName: String!, $userId: String!, $year: Int!, $imdbUrl: String!, $listId: Int) {
+    insert_movie(objects: [{ name: $movieName, created_by: $userId, year: $year, imdb_url: $imdbUrl, list: $listId }]) {
       affected_rows
     }
   }

@@ -72,7 +72,14 @@ function Movies(props) {
         <MoviesAddSection>
           <h3>Add the following movies?</h3>
           {moviesToAdd.map(movieToAdd => {
-            return <MovieToAdd movie={movieToAdd} addMovieMutation={addMovie} removeFromAdd={removeMovieFromToAdd} />;
+            return (
+              <MovieToAdd
+                list={data.list}
+                movie={movieToAdd}
+                addMovieMutation={addMovie}
+                removeFromAdd={removeMovieFromToAdd}
+              />
+            );
           })}
         </MoviesAddSection>
       )}
