@@ -59,13 +59,14 @@ function Movies(props) {
 
   if (loading) return 'Loading...';
   if (error) return `Movies Error! ${error.message}`;
+
   return (
     <>
       <BackLink to="/">
         <ChevronLeft />
         <span>Back</span>
       </BackLink>
-      <ListTitle>ListTitle</ListTitle>
+      <ListTitle>{data.list[0].name}</ListTitle>
       <MovieInput markToAdd={markMovieAsToAdd} />
       {moviesToAdd.length > 0 && (
         <MoviesAddSection>
@@ -75,7 +76,7 @@ function Movies(props) {
           })}
         </MoviesAddSection>
       )}
-      {data.movie.map((movie, index) => {
+      {data.list[0].movies.map((movie, index) => {
         return <MovieData renderer={Movie} id={movie.id} key={index} />;
       })}
     </>

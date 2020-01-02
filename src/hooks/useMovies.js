@@ -6,8 +6,12 @@ import { useAuth0 } from '../auth/auth0-wrapper';
 
 export const MOVIE_LIST = gql`
   query($listId: Int!) {
-    movie(where: { list: { _eq: $listId } }, order_by: { name: desc }) {
+    list(where: { id: { _eq: $listId } }, order_by: { name: desc }) {
       id
+      name
+      movies {
+        id
+      }
     }
   }
 `;

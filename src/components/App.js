@@ -69,7 +69,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <div style={{ height: 60 }} />
+      <div style={{ height: 100 }} />
       <Switch>
         <Layout type="MMB">
           <LayoutColumn>
