@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { gql } from 'apollo-boost';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import styled from 'styled-components';
 
 import Button from '@kiwicom/orbit-components/lib/Button';
 import Stack from '@kiwicom/orbit-components/lib/Stack';
@@ -8,27 +7,19 @@ import { useAuth0 } from '../auth/auth0-wrapper';
 
 import { Movie } from './Movie';
 
-// export const ADD_MOVIE = gql`
-//   query($id: Int!) {
-//   }
-// `;
+const MovieAddWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
-// const ADD_MOVIE = gql`
-//   mutation(
-//     $movieName: String!
-//     $userId: String!
-//     $year: Int!
-//     $imdbUrl: String!
-//   ) {
-//     insert_movie(
-//       objects: [
-//         {name: $movieName, created_by: $userId, year: $year, imdb_url: $imdbUrl}
-//       ]
-//     ) {
-//       affected_rows
-//     }
-//   }
-// `;
+const MovieAdd = styled.div`
+  flex-grow: 1;
+`;
+const MovieAddButtons = styled.div`
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+`;
 
 function MovieToAdd(props) {
   const { isAuthenticated, user } = useAuth0();
@@ -67,15 +58,19 @@ function MovieToAdd(props) {
   };
 
   return (
-    <Stack flex align="center">
-      <Movie add movie={movie} />
-      <Button size="large" onClick={onRemoveClick} type="critical">
-        No
-      </Button>
-      <Button size="large" onClick={onAddClick} type="success">
-        Yes
-      </Button>
-    </Stack>
+    <MovieAddWrapper>
+      <MovieAdd>
+        <Movie add movie={movie} />
+      </MovieAdd>
+      <MovieAddButtons>
+        <Button size="large" onClick={onAddClick} type="success">
+          Yes
+        </Button>
+        <Button size="large" onClick={onRemoveClick} type="critical">
+          No
+        </Button>
+      </MovieAddButtons>
+    </MovieAddWrapper>
   );
 }
 
