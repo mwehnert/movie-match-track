@@ -79,7 +79,7 @@ function List({ list, addMember, removeMember, userId }) {
               {[...list.list_members, {user: list.user}].map(({user}, index) => {
                 return <Member key={index} user={user} />;
               })}
-              <MemberAdd user={user} onClick={toggleAddMemberVisible} />
+              {list.created_by === user.sub && <MemberAdd user={user} onClick={toggleAddMemberVisible} />}
 
             </MemberWrapper>
           </Stack>

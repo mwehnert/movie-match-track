@@ -1,12 +1,13 @@
-import React, {useRef} from "react";
-import {gql} from "apollo-boost";
+import React, { useRef } from 'react';
+import { gql } from 'apollo-boost';
 
-import {useAuth0} from "../auth/auth0-wrapper";
-import useMovie from "../hooks/useMovie";
+import Loading from '@kiwicom/orbit-components/lib/Loading';
+import { useAuth0 } from '../auth/auth0-wrapper';
+import useMovie from '../hooks/useMovie';
 
 export const MOVIE_INFO = gql`
   query($id: Int!) {
-    movie(where: {id: {_eq: $id}}) {
+    movie(where: { id: { _eq: $id } }) {
       id
       name
       year
@@ -21,20 +22,17 @@ export const MOVIE_INFO = gql`
 `;
 
 function MovieData(props) {
-  const {isAuthenticated, user} = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
 
   const userId = useRef(null);
 
   if (isAuthenticated) {
     userId.current = user.sub;
   } else {
-    userId.current = "none";
+    userId.current = 'none';
   }
   const movieId = props.id ? props.id : props.match.params.id;
-  const [loading, error, data, watchMovie, unwatchMovie] = useMovie(
-    movieId,
-    userId
-  );
+  const [loading, error, data, watchMovie, unwatchMovie] = useMovie(movieId, userId);
   const RenderComponent = props.renderer ? props.renderer : null;
 
   const isMovieWatched = movie => {
@@ -45,7 +43,7 @@ function MovieData(props) {
       .includes(userId.current);
   };
 
-  if (loading) return "";
+  if (loading) return <Loading />;
   if (error) return `Movie Error! ${error.message}`;
 
   return (

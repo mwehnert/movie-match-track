@@ -31,15 +31,29 @@ const MovieCard = styled.article`
   transition: box-shadow 0.15s ease-in-out;
 `;
 
+const FlexRow = styled.div`
+  display: flex;
+  max-width: '100%';
+  flex-direction: ${({ add, suggestion }) => {
+    return add || suggestion ? 'row' : 'column';
+  }};
+  ${({ add, suggestion }) => {
+    return add || suggestion ? 'align: center;' : '';
+  }}
+`;
+
 function Movie({ movie, watchMovie, unwatchMovie, watched, onClickHandler, suggestion, add, userId }) {
   return (
     <MovieCard suggestion={suggestion} add={add} onClick={onClickHandler || (() => {})}>
-      <Stack align="center" wrap>
-        <Stack inline direction={add || suggestion ? 'row' : 'column'} align={add || suggestion ? 'center' : null}>
-          <h2>
-            <Truncate>{movie.name}</Truncate>
-          </h2>
-          <Stack inline>
+      <Stack wrap flex align="center">
+        <Stack
+          shrink
+          inline
+          direction={add || suggestion ? 'row' : 'column'}
+          align={add || suggestion ? 'center' : null}
+        >
+          <h2 style={{ wordBreak: 'break-word' }}>{movie.name}</h2>
+          <Stack wrap inline>
             <Badge>{movie.year}</Badge>
             <Badge>
               <a href={movie.imdb_url}>IMDB</a>

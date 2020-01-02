@@ -18,19 +18,6 @@ const MovieInputWrapper = styled.div`
     }
 `;
 
-const movies = [
-    {
-        name: 'Buddy der Weihnachtself',
-        year: 2003,
-        imdb_url: 'https://www.imdb.com/title/tt0319343/',
-    },
-    {
-        name: 'Titanic',
-        year: 1999,
-        imdb_url: 'https://www.imdb.com/title/tt03asf3/',
-    },
-];
-
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = value => {
     const inputValue = value.trim().toLowerCase();
@@ -48,12 +35,12 @@ const getSuggestions = value => {
             console.log(results);
             if (results.Error) return Promise.reject(results.Error);
             return results.Search.length < 1
-                ? []
-                : results.Search.map(result => {
+            ? []
+            : results.Search.map(result => {
                       return {
                           name: result.Title,
                           year: result.Year,
-                          imdb_url: `https://www.imdb.com/title/${result.imdbId}/`,
+                          imdb_url: `https://www.imdb.com/title/${result.imdbID}/`,
                       };
                   });
         });

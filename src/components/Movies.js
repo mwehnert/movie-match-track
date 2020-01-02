@@ -39,6 +39,13 @@ const ListTitle = styled.h1`
   margin-top: 0;
 `;
 
+const MoviesWrapper = styled.div`
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
 function Movies(props) {
   const [moviesToAdd, setMoviesToAdd] = useState([]);
   const { id: listId } = useParams();
@@ -61,7 +68,7 @@ function Movies(props) {
   if (error) return `Movies Error! ${error.message}`;
 
   return (
-    <>
+    <MoviesWrapper>
       <BackLink to="/">
         <ChevronLeft />
         <span>Back</span>
@@ -86,7 +93,7 @@ function Movies(props) {
       {data.list[0].movies.map((movie, index) => {
         return <MovieData renderer={Movie} id={movie.id} key={index} />;
       })}
-    </>
+    </MoviesWrapper>
   );
 }
 

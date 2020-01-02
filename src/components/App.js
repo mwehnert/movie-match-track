@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Layout, { LayoutColumn } from '@kiwicom/orbit-components/lib/Layout';
+import styled from 'styled-components';
 
 // for authentication using auth0
 
@@ -14,6 +15,14 @@ import { useAuth0 } from '../auth/auth0-wrapper';
 import Movies from './Movies.js';
 import Lists from './Lists.js';
 import Header from './Header.js';
+
+const LayoutWrapper = styled.main`
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: calc(100vw - 50px);
+  width: 900px;
+`;
 
 function App() {
   // for apollo client
@@ -69,14 +78,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Header />
-      <div style={{ height: 100 }} />
       <Switch>
-        <Layout type="MMB">
-          <LayoutColumn>
-            <Route exact path="/" component={Lists} />
-            <Route exact path="/list/:id" component={Movies} />
-          </LayoutColumn>
-        </Layout>
+        <LayoutWrapper>
+          <Route exact path="/" component={Lists} />
+          <Route exact path="/list/:id" component={Movies} />
+        </LayoutWrapper>
+        {/* <Layout type="MMB"> */}
+        {/* <LayoutColumn> */}
+        {/* </LayoutColumn> */}
+        {/* </Layout> */}
       </Switch>
     </ApolloProvider>
   );
